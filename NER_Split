@@ -1,0 +1,24 @@
+import re
+
+entities = {"PERSON": set(), "LOCATION": set(), "ORGANIZATION": set()}
+
+
+with open('Stanford_ner_result.txt', 'r', encoding='utf-8') as file:
+    lines = file.readlines()
+
+# Extraktion 
+current_entity = ""
+for line in lines:
+    line = line.strip()
+    if line.startswith("LOCATION:") or line.startswith("PERSON:") or line.startswith("ORGANIZATION:"):
+        current_entity = re.sub(r'^.*:\s', '', line)
+        entity_type = line.split(":")[0]
+        entities[entity_type].add(current_entity)
+
+# Speicherung
+for entity_type, entity_set in entities.items():
+    with open(f'{entity_type}_entities.txt', 'w', encoding='utf-8') as txt_file:
+        for entity in entity_set:
+            txt_file.write(entity + '\n')
+
+print("Textdateien  erfolgreich erstellt")
