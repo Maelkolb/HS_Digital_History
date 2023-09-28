@@ -47,6 +47,6 @@ def get_pos(word):
     return tag_dict.get(tag, wordnet.NOUN)  # Falls Tag nicht erkannt wird: Substantiv
 
 if __name__ == "__main__":
-    input_file_name = "Text_euseb_KG_full.txt"
+    input_file_name = "extrahierter_text4.txt"
     output_file_name = "cleaned_lemmatized_text_KG-full.txt"
     process_and_lemmatize(input_file_name, output_file_name)
